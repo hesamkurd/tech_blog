@@ -15,8 +15,38 @@ class $AssetsImagesGen {
   /// File path: assets/images/a1.png
   AssetGenImage get a1 => const AssetGenImage('assets/images/a1.png');
 
+  /// File path: assets/images/empty_state.png
+  AssetGenImage get emptyState =>
+      const AssetGenImage('assets/images/empty_state.png');
+
+  /// File path: assets/images/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
+  /// File path: assets/images/poster_test.png
+  AssetGenImage get posterTest =>
+      const AssetGenImage('assets/images/poster_test.png');
+
+  /// File path: assets/images/profileAvatar.png
+  AssetGenImage get profileAvatar =>
+      const AssetGenImage('assets/images/profileAvatar.png');
+
+  /// File path: assets/images/single_place_holder.jpg
+  AssetGenImage get singlePlaceHolder =>
+      const AssetGenImage('assets/images/single_place_holder.jpg');
+
+  /// File path: assets/images/tcbot.svg
+  String get tcbot => 'assets/images/tcbot.svg';
+
   /// List of all assets
-  List<AssetGenImage> get values => [a1];
+  List<dynamic> get values => [
+        a1,
+        emptyState,
+        logo,
+        posterTest,
+        profileAvatar,
+        singlePlaceHolder,
+        tcbot
+      ];
 }
 
 class Assets {
