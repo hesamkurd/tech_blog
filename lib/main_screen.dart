@@ -8,6 +8,7 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -36,30 +37,55 @@ class MainScreen extends StatelessWidget {
               SizedBox(
                 height: AppLayout.getHeight(16),
               ),
-              Stack(
-                children: [
-                  Container(
-                    width: AppLayout.getScreenWidth() / 1.19,
-                    height: AppLayout.getScreenHeight() / 4.2,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      image: DecorationImage(
-                          image: Assets.images.posterTest.provider(),
-                          fit: BoxFit.cover),
+              Container(
+                width: AppLayout.getScreenWidth() / 1.19,
+                height: AppLayout.getScreenHeight() / 4.2,
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        image: DecorationImage(
+                            image: Assets.images.posterTest.provider(),
+                            fit: BoxFit.cover),
+                      ),
+                      foregroundDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        gradient: const LinearGradient(
+                            colors: GradientColors.homePosterCoverGradient,
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter),
+                      ),
                     ),
-                  ),
-                  Container(
-                    width: AppLayout.getScreenWidth() / 1.19,
-                    height: AppLayout.getScreenHeight() / 4.2,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      gradient: const LinearGradient(
-                          colors: GradientColors.homePosterCoverGradient,
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter),
-                    ),
-                  ),
-                ],
+                    Positioned(
+                      bottom: 8,
+                      left: 16,
+                      right: 16,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "ملیکا عزیزی - یک روز پیش",
+                                style: textTheme.titleMedium,
+                              ),
+                              Text(
+                                "Likes 253",
+                                style: textTheme.titleMedium,
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "دوازده قدم برنامه نویسی یک دوره ی...",
+                            style: textTheme.displayLarge,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ],
           ),
