@@ -3,19 +3,22 @@ import 'package:tech_blog/app_layout.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/my_colors.dart';
 
+import 'models/fake_data.dart';
+
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
+    double bodyMargin = AppLayout.getScreenWidth() / 13;
     return SafeArea(
       child: Scaffold(
         body: Padding(
           padding: EdgeInsets.only(top: AppLayout.getHeight(16)),
-          // Top App bar
           child: Column(
             children: [
+              // Top App bar
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -37,7 +40,8 @@ class MainScreen extends StatelessWidget {
               SizedBox(
                 height: AppLayout.getHeight(16),
               ),
-              Container(
+              // Main Poster
+              SizedBox(
                 width: AppLayout.getScreenWidth() / 1.19,
                 height: AppLayout.getScreenHeight() / 4.2,
                 child: Stack(
@@ -46,7 +50,7 @@ class MainScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         image: DecorationImage(
-                            image: Assets.images.posterTest.provider(),
+                            image: homePagePosterMap["imageAsset"],
                             fit: BoxFit.cover),
                       ),
                       foregroundDecoration: BoxDecoration(
@@ -54,11 +58,11 @@ class MainScreen extends StatelessWidget {
                         gradient: const LinearGradient(
                             colors: GradientColors.homePosterCoverGradient,
                             begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter),
+                            end: Alignment.bottomCenter,),
                       ),
                     ),
                     Positioned(
-                      bottom: 8,
+                      bottom: 16,
                       left: 16,
                       right: 16,
                       child: Column(
@@ -68,17 +72,22 @@ class MainScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "ملیکا عزیزی - یک روز پیش",
+                                homePagePosterMap["writer"] +
+                                    " _ " +
+                                    homePagePosterMap["date"],
                                 style: textTheme.titleMedium,
                               ),
                               Text(
-                                "Likes 253",
+                                homePagePosterMap["view"] + "  بازدید",
                                 style: textTheme.titleMedium,
                               ),
                             ],
                           ),
+                          SizedBox(
+                            height: AppLayout.getHeight(8),
+                          ),
                           Text(
-                            "دوازده قدم برنامه نویسی یک دوره ی...",
+                            homePagePosterMap["title"],
                             style: textTheme.displayLarge,
                           ),
                         ],
@@ -87,6 +96,52 @@ class MainScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              // tag list
+              Container(
+                margin: EdgeInsets.only(
+                  top: AppLayout.getHeight(16),
+                ),
+                height: AppLayout.getHeight(60),
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: tagList.length,
+                    itemBuilder: ((context, index) {
+                      return Padding(
+                        padding: EdgeInsets.fromLTRB(index==tagList.length-1?bodyMargin:0,8,index==0?bodyMargin:16,8),
+                        child: Container(
+                            height: AppLayout.getHeight(60),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(24),
+                              gradient: const LinearGradient(
+                                colors: GradientColors.tags,
+                                begin: Alignment.centerRight,
+                                end: Alignment.centerLeft,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: AppLayout.getWidth(16),
+                              ),
+                              child: Row(
+                                children: [
+                                  ImageIcon(
+                                    Assets.icons.hashtagicon.provider(),
+                                    color: SolidColors.posterSubTitle,
+                                    size: 16,
+                                  ),
+                                  SizedBox(
+                                    width: AppLayout.getWidth(12),
+                                  ),
+                                  Text(
+                                    tagList[index].title,
+                                    style: textTheme.titleMedium,
+                                  ),
+                                ],
+                              ),
+                            )),
+                      );
+                    })),
+              )
             ],
           ),
         ),
