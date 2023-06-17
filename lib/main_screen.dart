@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tech_blog/app_layout.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/my_colors.dart';
+import 'package:tech_blog/my_strings.dart';
 
 import 'models/fake_data.dart';
 
@@ -27,10 +28,8 @@ class MainScreen extends StatelessWidget {
                     size: 32,
                   ),
                   Container(
-                      margin: EdgeInsets.symmetric(
-                          horizontal: AppLayout.getWidth(64)),
-                      child: Assets.images.a1
-                          .image(height: AppLayout.getScreenHeight() / 14)),
+                      margin: EdgeInsets.symmetric(horizontal: AppLayout.getWidth(64)),
+                      child: Assets.images.a1.image(height: AppLayout.getScreenHeight() / 14)),
                   const Icon(
                     Icons.search,
                     size: 32,
@@ -50,15 +49,15 @@ class MainScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         image: DecorationImage(
-                            image: homePagePosterMap["imageAsset"],
-                            fit: BoxFit.cover),
+                            image: homePagePosterMap["imageAsset"], fit: BoxFit.cover),
                       ),
                       foregroundDecoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         gradient: const LinearGradient(
-                            colors: GradientColors.homePosterCoverGradient,
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,),
+                          colors: GradientColors.homePosterCoverGradient,
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
                       ),
                     ),
                     Positioned(
@@ -72,9 +71,7 @@ class MainScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                homePagePosterMap["writer"] +
-                                    " _ " +
-                                    homePagePosterMap["date"],
+                                homePagePosterMap["writer"] + " _ " + homePagePosterMap["date"],
                                 style: textTheme.titleMedium,
                               ),
                               Text(
@@ -100,6 +97,7 @@ class MainScreen extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(
                   top: AppLayout.getHeight(16),
+                  bottom: AppLayout.getHeight(32),
                 ),
                 height: AppLayout.getHeight(60),
                 child: ListView.builder(
@@ -107,7 +105,8 @@ class MainScreen extends StatelessWidget {
                     itemCount: tagList.length,
                     itemBuilder: ((context, index) {
                       return Padding(
-                        padding: EdgeInsets.fromLTRB(index==tagList.length-1?bodyMargin:0,8,index==0?bodyMargin:16,8),
+                        padding: EdgeInsets.fromLTRB(index == tagList.length - 1 ? bodyMargin : 0,
+                            8, index == 0 ? bodyMargin : 16, 8),
                         child: Container(
                             height: AppLayout.getHeight(60),
                             decoration: BoxDecoration(
@@ -141,7 +140,49 @@ class MainScreen extends StatelessWidget {
                             )),
                       );
                     })),
-              )
+              ),
+              // see hottest blog text
+              Padding(
+                padding: EdgeInsets.only(
+                  right: AppLayout.getWidth(bodyMargin),
+                ),
+                child: Row(
+                  children: [
+                    ImageIcon(
+                      Assets.icons.bluePen.provider(),
+                      color: SolidColors.seeMore,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: AppLayout.getWidth(16)),
+                      child: Text(
+                        MyStrings.viewHottestBlog,
+                        style: textTheme.headlineMedium,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: AppLayout.getScreenHeight() / 4.1,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                    itemCount: blogList.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.fromLTRB(index == blogList.length - 1 ? bodyMargin : 0,
+                            8, index == 0 ? bodyMargin : 16, 8),
+                        child: Container(
+                          height: 50,
+                          width: 100,
+                          color: Colors.amber,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
         ),

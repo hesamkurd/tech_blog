@@ -39,6 +39,12 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.w300,
             color: SolidColors.posterSubTitle,
           ),
+          headlineMedium: TextStyle(
+            fontFamily: 'dana',
+            fontSize: 14,
+            fontWeight: FontWeight.w300,
+            color: SolidColors.seeMore,
+          ),
         ),
       ),
       home: const SplashScreen(),

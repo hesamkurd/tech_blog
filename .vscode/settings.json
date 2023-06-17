@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["spinkit"]
+  "cSpell.words": ["LTRB", "spinkit"],
+  "html.format.wrapLineLength": 100
 }
