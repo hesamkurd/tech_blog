@@ -268,7 +268,6 @@ class HottestBlogList extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
 class HottestText extends StatelessWidget {
   HottestText({
     super.key,
