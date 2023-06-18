@@ -18,6 +18,8 @@ List<HashtagsModel> tagList = [
   HashtagsModel(title: "هوش مصنوعی"),
 ];
 
+List<HashtagsModel> selectedTags = [];
+
 List<BlogModel> blogList = [
   BlogModel(
       id: 1,

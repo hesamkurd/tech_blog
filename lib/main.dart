@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tech_blog/app_layout.dart';
 import 'package:tech_blog/my_colors.dart';
 import 'package:tech_blog/view/register_intro.dart';
 
@@ -30,6 +31,12 @@ class MyApp extends StatelessWidget {
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.resolveWith(
               (states) => SolidColors.primaryColor,
+            ),
+            padding: MaterialStateProperty.resolveWith(
+              (states) => EdgeInsets.symmetric(
+                horizontal: AppLayout.getWidth(32),
+                vertical: AppLayout.getHeight(8),
+              ),
             ),
           ),
         ),
