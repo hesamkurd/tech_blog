@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tech_blog/app_layout.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/my_colors.dart';
+import 'package:tech_blog/my_strings.dart';
 import 'package:tech_blog/view/profile_screen.dart';
 import 'home_screen.dart';
 
@@ -12,6 +13,8 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
+final GlobalKey<ScaffoldState> _key = GlobalKey();
+
 class _MainScreenState extends State<MainScreen> {
   var selectedPageIndex = 0;
   @override
@@ -21,16 +24,69 @@ class _MainScreenState extends State<MainScreen> {
 
     return SafeArea(
       child: Scaffold(
+        key: _key,
+        drawer: Drawer(
+          backgroundColor: SolidColors.scaffoldBg,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: bodyMargin),
+            child: ListView(
+              children: [
+                DrawerHeader(
+                  child: Center(
+                    child: Image.asset(
+                      Assets.images.logo.path,
+                      scale: 3,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: Text(MyStrings.userProfile),
+                  onTap: () {},
+                ),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                ),
+                ListTile(
+                  title: Text(MyStrings.aboutTec),
+                  onTap: () {},
+                ),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                ),
+                ListTile(
+                  title: Text(MyStrings.shareTec),
+                  onTap: () {},
+                ),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                ),
+                ListTile(
+                  title: Text(MyStrings.tecIngithub),
+                  onTap: () {},
+                ),
+                const Divider(
+                  color: SolidColors.dividerColor,
+                ),
+              ],
+            ),
+          ),
+        ),
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: SolidColors.scaffoldBg,
           elevation: 0,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Icon(
-                Icons.menu,
-                size: 32,
-                color: Colors.black,
+              InkWell(
+                onTap: () {
+                  _key.currentState!.openDrawer();
+                },
+                child: const Icon(
+                  Icons.menu,
+                  size: 32,
+                  color: Colors.black,
+                ),
               ),
               Container(
                   margin: EdgeInsets.symmetric(horizontal: AppLayout.getWidth(64)),

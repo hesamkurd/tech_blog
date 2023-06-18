@@ -19,6 +19,7 @@ class TechDivider extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class MainTags extends StatelessWidget {
   MainTags({
     super.key,
