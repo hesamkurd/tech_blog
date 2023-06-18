@@ -3,7 +3,6 @@ import 'package:tech_blog/app_layout.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/my_colors.dart';
 import 'package:tech_blog/my_strings.dart';
-import 'package:tech_blog/view/home_screen.dart';
 
 import '../components/my_components.dart';
 

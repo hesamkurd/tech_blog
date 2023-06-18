@@ -19,10 +19,6 @@ class _MainScreenState extends State<MainScreen> {
     var textTheme = Theme.of(context).textTheme;
     double bodyMargin = AppLayout.getScreenWidth() / 13;
 
-    List<Widget> pagesMainScreen = [
-      HomeScreen(textTheme: textTheme, bodyMargin: bodyMargin),
-      ProfileScreen(textTheme: textTheme, bodyMargin: bodyMargin),
-    ];
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -50,7 +46,13 @@ class _MainScreenState extends State<MainScreen> {
         body: Stack(
           children: [
             Positioned.fill(
-              child: pagesMainScreen[selectedPageIndex],
+              child: IndexedStack(
+                index: selectedPageIndex,
+                children: [
+                  HomeScreen(textTheme: textTheme, bodyMargin: bodyMargin),
+                  ProfileScreen(textTheme: textTheme, bodyMargin: bodyMargin),
+                ],
+              ),
             ),
             BottomNavigation(
               bodyMargin: bodyMargin,

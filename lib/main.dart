@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tech_blog/my_colors.dart';
-import 'package:tech_blog/view/splash_screen.dart';
+import 'package:tech_blog/view/register_intro.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +26,18 @@ class MyApp extends StatelessWidget {
       ],
       theme: ThemeData(
         fontFamily: 'dana',
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.resolveWith(
+              (states) => SolidColors.primaryColor,
+            ),
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
         textTheme: const TextTheme(
           displayLarge: TextStyle(
             fontFamily: 'dana',
@@ -65,7 +77,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const SplashScreen(),
+      home: const RegisterIntro(),
     );
   }
 }

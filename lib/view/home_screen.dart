@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tech_blog/models/fake_data.dart';
-
 import '../app_layout.dart';
 import '../gen/assets.gen.dart';
 import '../my_colors.dart';
@@ -268,6 +267,7 @@ class HottestBlogList extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class HottestText extends StatelessWidget {
   HottestText({
     super.key,
