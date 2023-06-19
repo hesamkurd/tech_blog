@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tech_blog/app_layout.dart';
+import 'package:tech_blog/components/app_layout.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
-import 'package:tech_blog/my_strings.dart';
+import 'package:tech_blog/components/my_strings.dart';
 import 'package:tech_blog/view/my_cats.dart';
-import 'package:validators/validators.dart';
 
 class RegisterIntro extends StatelessWidget {
   const RegisterIntro({super.key});
@@ -77,9 +76,7 @@ class RegisterIntro extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(24),
                   child: TextField(
-                    onChanged: (value) {
-                      print('${value}is email: ${isEmail(value)}');
-                    },
+                    onChanged: (value) {},
                     style: textTheme.displayMedium,
                     textAlign: TextAlign.center,
                     decoration: const InputDecoration(
@@ -130,9 +127,7 @@ class RegisterIntro extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(24),
                   child: TextField(
-                    onChanged: (value) {
-                      print('${value}is email: ${isEmail(value)}');
-                    },
+                    onChanged: (value) {},
                     style: textTheme.displayMedium,
                     textAlign: TextAlign.center,
                     decoration: const InputDecoration(

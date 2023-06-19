@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tech_blog/app_layout.dart';
-import 'package:tech_blog/my_colors.dart';
+import 'package:tech_blog/components/app_layout.dart';
+import 'package:tech_blog/components/my_colors.dart';
 import 'package:tech_blog/view/main_screen.dart';
 import 'package:tech_blog/view/register_intro.dart';
 
@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const RegisterIntro(),
+      home: MainScreen(),
     );
   }
 }

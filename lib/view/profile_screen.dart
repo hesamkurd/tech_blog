@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tech_blog/app_layout.dart';
+import 'package:tech_blog/components/app_layout.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
-import 'package:tech_blog/my_colors.dart';
-import 'package:tech_blog/my_strings.dart';
+import 'package:tech_blog/components/my_colors.dart';
+import 'package:tech_blog/components/my_strings.dart';
 
 import '../components/my_components.dart';
 

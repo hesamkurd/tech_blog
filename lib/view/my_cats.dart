@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tech_blog/app_layout.dart';
+import 'package:tech_blog/components/app_layout.dart';
 import 'package:tech_blog/components/my_components.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
 import 'package:tech_blog/models/fake_data.dart';
-import 'package:tech_blog/my_strings.dart';
+import 'package:tech_blog/components/my_strings.dart';
 
-import '../my_colors.dart';
+import '../components/my_colors.dart';
 
 class MyCats extends StatefulWidget {
   const MyCats({super.key});

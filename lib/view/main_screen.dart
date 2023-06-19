@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:tech_blog/app_layout.dart';
+import 'package:get/get.dart';
+import 'package:tech_blog/components/app_layout.dart';
+import 'package:tech_blog/components/my_colors.dart';
+import 'package:tech_blog/components/my_strings.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
-import 'package:tech_blog/my_colors.dart';
-import 'package:tech_blog/my_strings.dart';
 import 'package:tech_blog/view/profile_screen.dart';
 import 'home_screen.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
-class _MainScreenState extends State<MainScreen> {
-  var selectedPageIndex = 0;
+class MainScreen extends StatelessWidget {
+  RxInt selectedPageIndex = 0.obs;
+
+  MainScreen({
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
@@ -102,20 +100,20 @@ class _MainScreenState extends State<MainScreen> {
         body: Stack(
           children: [
             Positioned.fill(
-              child: IndexedStack(
-                index: selectedPageIndex,
-                children: [
-                  HomeScreen(textTheme: textTheme, bodyMargin: bodyMargin),
-                  ProfileScreen(textTheme: textTheme, bodyMargin: bodyMargin),
-                ],
+              child: Obx(
+                () => IndexedStack(
+                  index: selectedPageIndex.value,
+                  children: [
+                    HomeScreen(textTheme: textTheme, bodyMargin: bodyMargin),
+                    ProfileScreen(textTheme: textTheme, bodyMargin: bodyMargin),
+                  ],
+                ),
               ),
             ),
             BottomNavigation(
               bodyMargin: bodyMargin,
               changeScreen: (int value) {
-                setState(() {
-                  selectedPageIndex = value;
-                });
+                selectedPageIndex.value = value;
               },
             ),
           ],
