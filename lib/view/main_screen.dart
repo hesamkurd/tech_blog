@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tech_blog/components/api_constant.dart';
 import 'package:tech_blog/components/app_layout.dart';
 import 'package:tech_blog/components/my_colors.dart';
 import 'package:tech_blog/components/my_strings.dart';
 import 'package:tech_blog/gen/assets.gen.dart';
+import 'package:tech_blog/services/dio_service.dart';
 import 'package:tech_blog/view/profile_screen.dart';
 import 'home_screen.dart';
 
@@ -17,6 +19,7 @@ class MainScreen extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    DioService().getMethod(ApiConstant.getHomeItems);
     var textTheme = Theme.of(context).textTheme;
     double bodyMargin = AppLayout.getScreenWidth() / 13;
 
