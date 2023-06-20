@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:tech_blog/controller/home_screen_controller.dart';
 import 'package:tech_blog/models/fake_data.dart';
 import '../components/app_layout.dart';
 import '../components/my_components.dart';
 import '../gen/assets.gen.dart';
 import '../components/my_colors.dart';
 import '../components/my_strings.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({
+  HomeScreen({
     super.key,
     required this.textTheme,
     required this.bodyMargin,
   });
+
+  HomeScreenController homeScreenController = Get.put(HomeScreenController());
 
   final TextTheme textTheme;
   final double bodyMargin;
@@ -36,7 +40,7 @@ class HomeScreen extends StatelessWidget {
               text: MyStrings.viewHottestBlog,
             ),
             // blog list
-            HottestBlogList(bodyMargin: bodyMargin, textTheme: textTheme),
+            topVisited(),
             // text hottest podcast
             HottestText(
               bodyMargin: bodyMargin,
@@ -45,7 +49,7 @@ class HomeScreen extends StatelessWidget {
               text: MyStrings.viewHottestPodCasts,
             ),
             // podcast list
-            HottestPodcastList(bodyMargin: bodyMargin, textTheme: textTheme),
+            topPodcasts(),
             SizedBox(
               height: AppLayout.getHeight(72),
             )
@@ -54,215 +58,163 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-}
 
-class HottestPodcastList extends StatelessWidget {
-  const HottestPodcastList({
-    super.key,
-    required this.bodyMargin,
-    required this.textTheme,
-  });
-
-  final double bodyMargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget topVisited() {
     return SizedBox(
-      height: AppLayout.getScreenHeight() / 4.1,
-      child: ListView.builder(
-        itemCount: blogList.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.fromLTRB(
-              index == blogList.length - 1 ? bodyMargin : 0,
-              16,
-              index == 0 ? bodyMargin : 16,
-              8,
-            ),
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    Container(
-                      width: AppLayout.getScreenWidth() / 3.2,
-                      height: AppLayout.getScreenHeight() / 7,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        image: DecorationImage(
-                          image: NetworkImage(blogList[index].imageUrl),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      foregroundDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: GradientColors.blogPost,
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 8,
-                      right: 8,
-                      left: 8,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            blogList[index].writer,
-                            style: textTheme.titleSmall,
+      height: AppLayout.getScreenHeight() / 3,
+      child: Obx(
+        () => ListView.builder(
+          itemCount: homeScreenController.topVisitedList.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.fromLTRB(
+                index == homeScreenController.topVisitedList.length - 1 ? bodyMargin : 0,
+                16,
+                index == 0 ? bodyMargin : 16,
+                8,
+              ),
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      Container(
+                        height: AppLayout.getScreenHeight() / 5,
+                        width: AppLayout.getScreenWidth() / 2,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          image: DecorationImage(
+                            image: NetworkImage(homeScreenController.topVisitedList[index].image!),
+                            fit: BoxFit.cover,
                           ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 4),
-                                child: Text(
-                                  blogList[index].views,
-                                  style: textTheme.titleSmall,
-                                ),
-                              ),
-                              SizedBox(
-                                width: AppLayout.getWidth(8),
-                              ),
-                              const Icon(
-                                Icons.remove_red_eye_sharp,
-                                color: SolidColors.posterSubTitle,
-                                size: 20,
-                              )
-                            ],
-                          )
-                        ],
+                        ),
+                        foregroundDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          gradient: const LinearGradient(
+                            colors: GradientColors.blogPost,
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: AppLayout.getHeight(16),
-                ),
-                SizedBox(
-                  // height: AppLayout.getScreenHeight() / 7,
-                  width: AppLayout.getScreenWidth() / 3.2,
-                  child: Text(
-                    blogList[index].title,
-                    maxLines: 2,
-                    style: textTheme.headlineSmall,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.right,
+                      Positioned(
+                        bottom: 8,
+                        right: 8,
+                        left: 8,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              homeScreenController.topVisitedList[index].author!,
+                              style: textTheme.titleSmall,
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4),
+                                  child: Text(
+                                    homeScreenController.topVisitedList[index].view!,
+                                    style: textTheme.titleSmall,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: AppLayout.getWidth(8),
+                                ),
+                                const Icon(
+                                  Icons.remove_red_eye_sharp,
+                                  color: SolidColors.posterSubTitle,
+                                  size: 20,
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      )
+                    ],
                   ),
-                ),
-              ],
-            ),
-          );
-        },
+                  SizedBox(
+                    height: AppLayout.getHeight(16),
+                  ),
+                  SizedBox(
+                    // height: AppLayout.getScreenHeight() / 7,
+                    width: AppLayout.getScreenWidth() / 2,
+                    child: Text(
+                      homeScreenController.topVisitedList[index].title!,
+                      maxLines: 2,
+                      style: textTheme.headlineSmall,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.right,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
-}
 
-class HottestBlogList extends StatelessWidget {
-  const HottestBlogList({
-    super.key,
-    required this.bodyMargin,
-    required this.textTheme,
-  });
-
-  final double bodyMargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget topPodcasts() {
     return SizedBox(
-      height: AppLayout.getScreenHeight() / 4.1,
-      child: ListView.builder(
-        itemCount: blogList.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.fromLTRB(
-              index == blogList.length - 1 ? bodyMargin : 0,
-              16,
-              index == 0 ? bodyMargin : 16,
-              8,
-            ),
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    Container(
-                      height: AppLayout.getScreenHeight() / 7,
-                      width: AppLayout.getScreenWidth() / 3.2,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        image: DecorationImage(
-                          image: NetworkImage(blogList[index].imageUrl),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      foregroundDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: GradientColors.blogPost,
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 8,
-                      right: 8,
-                      left: 8,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            blogList[index].writer,
-                            style: textTheme.titleSmall,
+      height: AppLayout.getScreenHeight() / 3,
+      child: Obx(
+        () => ListView.builder(
+          itemCount: homeScreenController.topPodcastsList.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.fromLTRB(
+                index == homeScreenController.topPodcastsList.length - 1 ? bodyMargin : 0,
+                16,
+                index == 0 ? bodyMargin : 16,
+                8,
+              ),
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      Container(
+                        width: AppLayout.getScreenWidth() / 2,
+                        height: AppLayout.getScreenHeight() / 5,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          image: DecorationImage(
+                            image:
+                                NetworkImage(homeScreenController.topPodcastsList[index].poster!),
+                            fit: BoxFit.cover,
                           ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 4),
-                                child: Text(
-                                  blogList[index].views,
-                                  style: textTheme.titleSmall,
-                                ),
-                              ),
-                              SizedBox(
-                                width: AppLayout.getWidth(8),
-                              ),
-                              const Icon(
-                                Icons.remove_red_eye_sharp,
-                                color: SolidColors.posterSubTitle,
-                                size: 20,
-                              )
-                            ],
-                          )
-                        ],
+                        ),
+                        foregroundDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          gradient: const LinearGradient(
+                            colors: GradientColors.blogPost,
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                          ),
+                        ),
                       ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: AppLayout.getHeight(16),
-                ),
-                SizedBox(
-                  // height: AppLayout.getScreenHeight() / 7,
-                  width: AppLayout.getScreenWidth() / 3.2,
-                  child: Text(
-                    blogList[index].title,
-                    maxLines: 2,
-                    style: textTheme.headlineSmall,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.right,
+                    ],
                   ),
-                ),
-              ],
-            ),
-          );
-        },
+                  SizedBox(
+                    height: AppLayout.getHeight(16),
+                  ),
+                  SizedBox(
+                    // height: AppLayout.getScreenHeight() / 7,
+                    width: AppLayout.getScreenWidth() / 2,
+                    child: Text(
+                      homeScreenController.topPodcastsList[index].title!,
+                      maxLines: 1,
+                      style: textTheme.headlineSmall,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.right,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
